@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -17,4 +22,22 @@ body {
 
 .main {
     grid-column: span 3;
+}
+
+
+/* Sidebar */
+
+.sidebar-title {
+    display: flex;
+}
+
+
+/* Main */
+
+hgroup {
+    display: flex;
+}
+
+.main-footer {
+    display: flex;
 }
