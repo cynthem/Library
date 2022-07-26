@@ -6,12 +6,12 @@
   margin: 0;
 }
 
-html {
-    min-height: 100%;
-    position: relative;
+html, 
+body {
+    height: 100%;
 }
 
-body {
+.container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
@@ -22,6 +22,9 @@ body {
 
 .main {
     grid-column: span 3;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 30px 1fr 30px;
 }
 
 
@@ -36,6 +39,10 @@ body {
 
 hgroup {
     display: flex;
+}
+
+.main-content {
+    overflow-y: scroll;
 }
 
 .main-footer {
