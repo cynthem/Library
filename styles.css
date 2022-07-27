@@ -177,12 +177,6 @@ button:active {
     font-size: 1.15vw;
 }
 
-.status-form > div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 .details-form input[type=text],
 .details-form input[type=number],
 .details-form input[type=date] {
@@ -270,6 +264,11 @@ label > input[type="checkbox"]:checked + *::before {
 
 label > input[type="checkbox"]:checked + * {
     color: #1c422b;
+}
+
+label > input[type="checkbox"] + * {
+    display: inline-flex;
+    gap: 8px;
 }
 
 .sidebar-footer {
