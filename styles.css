@@ -172,6 +172,36 @@ button > img {
     align-items: center;
     gap: 5px;
 }
+
+sup {
+    position: relative;
+}
+
+.fa-circle-question:hover {
+    cursor: pointer;
+}
+
+.rating-info {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 165px;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    line-height: 1.4;
+    background-color: #1c422b;
+    font-size: 14px;
+    font-family: 'Merriweather', sans-serif;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    visibility: hidden;
+}
+
+.fa-circle-question:hover > .rating-info {
+    visibility: visible;
+}
+
 .sidebar-footer {
     display: flex;
     justify-content: center;
