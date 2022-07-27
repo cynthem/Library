@@ -116,6 +116,10 @@ body {
     display: flex;
 }
 
+.sidebar-title > img {
+    width: 50px;
+}
+
 
 /* Main */
 
