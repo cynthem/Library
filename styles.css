@@ -100,8 +100,9 @@ body {
 .sidebar {
     grid-column: span 1;
     background-color: #a14e0c;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 100px 15% 1fr 30px;
+    grid-template-rows: clamp(100px, 20%, 175px) 1fr 50px;
 }
 
 .main {
@@ -127,6 +128,27 @@ body {
 
 h1 {
     font-size: 3.5vw;
+}
+
+.sidebar-content {
+    padding: 8%;
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    overflow-y: scroll;
+}
+
+.sidebar-add {
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+    outline: none;
+    background-color: #a14e0c;
+}
+
+button > img {
+    width: 50px;
 }
 
 
