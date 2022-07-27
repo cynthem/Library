@@ -15,6 +15,8 @@ function addBookToLibrary(title, author, rating=0, readStatus=0, start=0, end=0)
 }
 
 function displayLibrary() {
+    localStorage.setItem('books', JSON.stringify(myLibrary));
+    updateLibraryStats();
     const listContent = document.querySelector('.main-content');
     listContent.textContent = '';
     for (let i = 0; i < myLibrary.length; i++) {
@@ -63,5 +65,29 @@ function displayLibrary() {
         const end = document.createElement('p');
         end.textContent = myLibrary[i].end;
         listRow.appendChild(end);
+        // Trash
+        const trash = document.createElement('i');
+        trash.classList.add('fa-solid', 'fa-trash-can');
+        listRow.appendChild(trash);
     }
+}
+
+function updateLibraryStats() {
+    const totalRead = document.querySelector('.read-total');
+    const totalUnread = document.querySelector('.unread-total');
+    const totalBooks = document.querySelector('.books-total');
+    let readCounter = 0;
+    let unreadCounter = 0;
+    totalRead.textContent = 0;
+    totalUnread.textContent = 0;
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].readStatus === 'read') {
+            readCounter += 1;
+            totalRead.textContent = readCounter;
+        } else if (myLibrary[i].readStatus === 'unread' || myLibrary[i].readStatus === 'wish') {
+            unreadCounter += 1;
+            totalUnread.textContent = unreadCounter;
+        }
+    }
+    totalBooks.textContent = myLibrary.length;
 }
