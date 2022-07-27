@@ -201,6 +201,15 @@ h2 {
 
 .main-content {
     overflow-y: scroll;
+    display: grid;
+    grid-auto-rows: 15%;
+}
+
+.demo {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 0 8%;
+    justify-items: center;
 }
 
 .main-footer {
