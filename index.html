@@ -15,35 +15,37 @@
                 <img src="./resources/images/bookLogo.png">
                 <h1>myLibrary</h1>
             </div>
-            <div class="sidebar-add">
-                <button><img src="./resources/images/addBook.png"></button>
-            </div>
-            <div class="sidebar-form">
-                <form>
-                    <input type="text" name="title" placeholder="Enter title here" required>
-                    <br>
-                    <input type="text" name="author" placeholder="Enter author here" required>
-                    <br>
-                    <label for="rating">Optional: Select a rating (info)</label>
-                    <input type="range" name="rating" id="rating" min="1" max="5">
-                    <br>
-                    <label for="start">Optional: Select a reading start date</label>
-                    <input type="date" name="start" id="start" value="2022-07-26">
-                    <br>
-                    <label for="end">Optional: Select a reading end date</label>
-                    <input type="date" name="end" id="end" value="2022-07-26">
-                </form>
-                <p>Optional:</p>
-                <form>
-                    <input type="checkbox" name="status" id="read" value="read">
-                    <label for="read">I have read this book.</label>
-                    <br>
-                    <input type="checkbox" name="status" id="currently" value="currently">
-                    <label for="currently">I am currently reading this book.</label>
-                    <br>
-                    <input type="checkbox" name="status" id="planning" value="planning">
-                    <label for="planning">I want to read this book.</label>
-                </form>
+            <div class="sidebar-content">
+                <div class="sidebar-add">
+                    <button><img src="./resources/images/addBook.png"></button>
+                </div>
+                <div class="sidebar-forms">
+                    <form>
+                        <input type="text" name="title" placeholder="Enter title here" required>
+                        <br>
+                        <input type="text" name="author" placeholder="Enter author here" required>
+                        <br>
+                        <label for="rating">Optional: Select a rating (info)</label>
+                        <input type="range" name="rating" id="rating" min="1" max="5">
+                        <br>
+                        <label for="start">Optional: Select a reading start date</label>
+                        <input type="date" name="start" id="start" value="2022-07-26">
+                        <br>
+                        <label for="end">Optional: Select a reading end date</label>
+                        <input type="date" name="end" id="end" value="2022-07-26">
+                    </form>
+                    <p>Optional:</p>
+                    <form>
+                        <input type="checkbox" name="status" id="read" value="read">
+                        <label for="read">I have read this book.</label>
+                        <br>
+                        <input type="checkbox" name="status" id="currently" value="currently">
+                        <label for="currently">I am currently reading this book.</label>
+                        <br>
+                        <input type="checkbox" name="status" id="planning" value="planning">
+                        <label for="planning">I want to read this book.</label>
+                    </form>
+                </div>
             </div>
             <div class="sidebar-footer">Made by CMP</div>
         </div>
