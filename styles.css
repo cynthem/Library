@@ -158,6 +158,10 @@ button:hover {
     transform: scale(1.2);
 }
 
+button:active {
+    transform: translate(-5px, 5px);
+}
+
 .details-form {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
