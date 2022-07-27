@@ -197,12 +197,14 @@ h2 {
     text-align: center;
     font-size: 1.75vw;
     font-family: 'Courier New', monospace;
+    letter-spacing: 0.02em;
 }
 
 .main-content {
     overflow-y: scroll;
     display: grid;
-    grid-auto-rows: 15%;
+    grid-auto-rows: 13%;
+    letter-spacing: 0.02em;
 }
 
 .demo {
@@ -210,6 +212,8 @@ h2 {
     grid-template-columns: repeat(6, 1fr);
     margin: 0 8%;
     justify-items: center;
+    align-items: center;
+    border-bottom: 2px double black;
 }
 
 .main-footer {
