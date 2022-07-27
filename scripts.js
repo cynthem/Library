@@ -9,9 +9,18 @@ function Book() {
     this.end = end;
 }
 
+// First check storage for pre-existing books
+if (localStorage.getItem('books') === null) {
+    myLibrary = [];
+} else {
+    const storedBooks = JSON.parse(localStorage.getItem('books'));
+    myLibrary = storedBooks;
+}
+
 function addBookToLibrary(title, author, rating=0, readStatus=0, start=0, end=0) {
     const newBook = new Book(title, author, rating, readStatus, start, end);
-    myLibrary.push(book);
+    myLibrary.push(newBook);
+    displayLibrary();
 }
 
 function displayLibrary() {
