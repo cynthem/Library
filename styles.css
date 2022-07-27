@@ -183,6 +183,16 @@ button:active {
     gap: 5px;
 }
 
+.details-form input[type=text],
+.details-form input[type=number],
+.details-form input[type=date] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eaebeb;
+    border-bottom: 2px double black;
+}
+
 sup {
     position: relative;
 }
