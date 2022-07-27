@@ -214,6 +214,29 @@ h2 {
     justify-items: center;
     align-items: center;
     border-bottom: 2px double black;
+    font-size: 1.25vw;
+}
+
+.fa-trash-can {
+    position: absolute;
+    right: 3%;
+    visibility: hidden;
+}
+
+.demo:hover > .fa-trash-can {
+    visibility: visible;
+}
+
+.fa-circle-xmark {
+    color: rgb(255, 82, 82);
+}
+
+.fa-circle-check {
+    color: #7cb6de;
+}
+
+.fa-bookmark {
+    color: #efefa6;
 }
 
 .main-footer {
