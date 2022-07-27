@@ -106,7 +106,7 @@ body {
     grid-column: span 3;
     height: 100vh;
     display: grid;
-    grid-template-rows: 30px 1fr 30px;
+    grid-template-rows: 20% 1fr 5%;
 }
 
 
@@ -117,7 +117,7 @@ body {
 }
 
 .sidebar-title > img {
-    width: 50px;
+    width: 25%;
 }
 
 
@@ -137,6 +137,5 @@ hgroup {
 
 .main-footer {
     display: flex;
-    background-color: #7cb6de;
-    color:rgb(47, 47, 47);
+    background-color: #a14e0c;
 }
