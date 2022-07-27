@@ -191,6 +191,14 @@ button:active {
     outline: none;
     color: #eaebeb;
     border-bottom: 2px double black;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+input::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-style: italic;
 }
 
 sup {
@@ -224,7 +232,7 @@ sup {
 
 .details-form input[type=number] {
     width: 45px;
-    padding: 0 0 1px 10px;
+    padding-bottom: 1px;
     margin-left: 10px;
     font-size: 16px;
 }
