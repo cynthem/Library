@@ -151,6 +151,13 @@ button > img {
     width: 50px;
 }
 
+.sidebar-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
 
 /* Main */
 
