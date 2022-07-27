@@ -159,7 +159,7 @@ button:hover {
 }
 
 button:active {
-    transform: translate(-5px, 5px);
+    transform: translate(-3px, 5px);
 }
 
 .details-form {
@@ -277,6 +277,18 @@ label > input[type="checkbox"] + * {
     align-items: center;
     gap: 2px;
     font-size: 1vw;
+}
+
+a {
+    transition: scale 300ms ease-in-out;
+}
+
+a:hover {
+    transform: scale(1.2);
+}
+
+a:active {
+    transform: scale(0.8);
 }
 
 
