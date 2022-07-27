@@ -237,6 +237,14 @@ sup {
     font-size: 16px;
 }
 
+.start-date {
+    margin-left: 1vw;
+}
+
+.end-date {
+    margin-left: 1.3vw;
+}
+
 .sidebar-footer {
     display: flex;
     justify-content: center;
