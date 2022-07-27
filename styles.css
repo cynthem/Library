@@ -93,10 +93,13 @@ body {
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    background-color: #1c422b;
+    color: #eaebeb;
 }
 
 .sidebar {
     grid-column: span 1;
+    background-color: #a14e0c;
 }
 
 .main {
@@ -116,6 +119,10 @@ body {
 
 /* Main */
 
+.main-header {
+    background-color: #a14e0c;
+}
+
 hgroup {
     display: flex;
 }
@@ -126,4 +133,6 @@ hgroup {
 
 .main-footer {
     display: flex;
+    background-color: #7cb6de;
+    color:rgb(47, 47, 47);
 }
