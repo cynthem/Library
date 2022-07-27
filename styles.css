@@ -151,6 +151,12 @@ button > img {
     width: 50px;
 }
 
+.details-form {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 25px;
+}
+
 .sidebar-footer {
     display: flex;
     justify-content: center;
