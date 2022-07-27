@@ -109,7 +109,7 @@ body {
     grid-column: span 3;
     height: 100vh;
     display: grid;
-    grid-template-rows: clamp(100px, 20%, 175px) 1fr 50px;
+    grid-template-rows: clamp(100px, 20%, 175px) 1fr 70px;
 }
 
 
@@ -163,10 +163,17 @@ button > img {
 
 .main-header {
     background-color: #a14e0c;
+    margin: 3.5% 8%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-hgroup {
-    display: flex;
+h2 {
+    text-align: center;
+    font-size: 2vw;
 }
 
 .main-content {
@@ -174,6 +181,18 @@ hgroup {
 }
 
 .main-footer {
-    display: flex;
     background-color: #a14e0c;
+    margin: 1% 30%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.main-footer > div {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 1.5vw;
 }
