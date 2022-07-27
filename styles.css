@@ -146,10 +146,16 @@ button {
     border: none;
     outline: none;
     background-color: #a14e0c;
+    transition: all 200ms ease-in-out;
 }
 
 button > img {
     width: 5vw;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
 .details-form {
@@ -183,7 +189,7 @@ sup {
 
 .rating-info {
     position: absolute;
-    bottom: 15px;
+    bottom: 18px;
     left: 15px;
     width: 165px;
     padding: 12px;
@@ -244,7 +250,7 @@ h2 {
     justify-items: center;
     align-items: center;
     border-bottom: 2px double black;
-    font-size: 1.25vw;
+    font-size: 1.15vw;
 }
 
 .fa-trash-can {
