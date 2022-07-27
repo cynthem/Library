@@ -25,10 +25,12 @@
                         <input type="text" name="title" placeholder="Enter title (required)" required>
                         <input type="text" name="author" placeholder="Enter author (required)" required>
                         <label for="rating">Rating: 
-                            <sup><i class="fa-solid fa-circle-question fa-sm">
-                                <span class="rating-info">Optional: rate the book from 1 (worst) to 5 (best).</span>
-                            </i></sup>
-                            <input type="number" name="rating" id="rating" min="0" max="5">
+                            <sup>
+                                <i class="fa-solid fa-circle-question fa-sm">
+                                    <span class="rating-info">Optional: rate the book from 1 (worst) to 5 (best).</span>
+                                </i>
+                            </sup>
+                            <input type="number" name="rating" id="rating" min="1" max="5">
                         </label>
                         <label for="start">Reading start date:
                             <input type="date" name="start" id="start" value="2022-07-26">
