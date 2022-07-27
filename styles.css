@@ -318,7 +318,7 @@ h2 {
     letter-spacing: 0.02em;
 }
 
-.demo {
+.list-item {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     margin: 0 8%;
@@ -334,7 +334,7 @@ h2 {
     visibility: hidden;
 }
 
-.demo:hover > .fa-trash-can {
+.list-item:hover > .fa-trash-can {
     visibility: visible;
 }
 
