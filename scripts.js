@@ -106,21 +106,74 @@ function handleClicks() {
         const { target } = e;
         if (target.classList.contains('add-book')) {
             validateForm(e);
-        } else if (target.classList.contains('fa-1')) {
-            target.classList.replace('fa-1', 'fa-2');
-        } else if (target.classList.contains('fa-2')) {
-            target.classList.replace('fa-2', 'fa-3');
-        } else if (target.classList.contains('fa-3')) {
-            target.classList.replace('fa-3', 'fa-4');
-        } else if (target.classList.contains('fa-4')) {
-            target.classList.replace('fa-4', 'fa-5');
-        } else if (target.classList.contains('fa-5')) {
-            target.classList.replace('fa-5', 'fa-1');
-        } else if (target.classList.contains('fa-circle-xmark')) {
-            target.classList.replace('fa-circle-xmark', 'fa-circle-check');
-        } else if (target.classList.contains('fa-bookmark')) {
-            target.classList.remove('fa-bookmark', 'fa-lg');
-            target.classList.add('fa-circle-check', 'fa-xl');
+        } else if (target.classList.contains('fa-1') ||
+                    target.classList.contains('fa-2') ||
+                    target.classList.contains('fa-3') ||
+                    target.classList.contains('fa-4') ||
+                    target.classList.contains('fa-5')) {   
+            changeRating(e);
+        } else if (target.classList.contains('fa-circle-xmark') ||
+                    target.classList.contains('fa-bookmark')) {
+            changeStatus(e);
+        } else if (target.classList.contains('starting') ||
+                    target.classList.contains('ending')) {
+            changeDate(e);
+        } else if (target.classList.contains('fa-trash-can')) {
+            removeBook(e);
         }
     })
 }
+
+function validateForm(e) {}
+
+function changeRating(e) {
+    const { target } = e;
+    const changed = target.parentNode;
+    if (target.classList.contains('fa-1')) {
+        target.classList.replace('fa-1', 'fa-2');
+        myLibrary[changed].rating = '2';
+    } else if (target.classList.contains('fa-2')) {
+        target.classList.replace('fa-2', 'fa-3');
+        myLibrary[changed].rating = '3';
+    } else if (target.classList.contains('fa-3')) {
+        target.classList.replace('fa-3', 'fa-4');
+        myLibrary[changed].rating = '4';
+    } else if (target.classList.contains('fa-4')) {
+        target.classList.replace('fa-4', 'fa-5');
+        myLibrary[changed].rating = '5';
+    } else if (target.classList.contains('fa-5')) {
+        target.classList.replace('fa-5', 'fa-1');
+        myLibrary[changed].rating = '1';
+    }
+    displayLibrary();
+}
+
+function changeStatus(e) {
+    const { target } = e;
+    const changed = target.parentNode;
+    if (target.classList.contains('fa-circle-xmark')) {
+        target.classList.replace('fa-circle-xmark', 'fa-circle-check');
+        myLibrary[changed].status = 'read';
+    } else if (target.classList.contains('fa-bookmark')) {
+        target.classList.remove('fa-bookmark', 'fa-lg');
+        target.classList.add('fa-circle-check', 'fa-xl');
+        myLibrary[changed].status = 'read';
+    }
+    displayLibrary();
+}
+
+function changeDate(e) {
+    const { target } = e;
+
+}
+
+function removeBook(e) {
+    const removalRow = e.target.parentNode - 1;
+    myLibrary.splice(removalRow, 1);
+    displayLibrary();
+}
+
+
+
+
+            
