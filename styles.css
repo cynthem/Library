@@ -300,6 +300,10 @@ h2 {
     color: #efefa6;
 }
 
+.invisible {
+    display: none;
+}
+
 .main-footer {
     background-color: #a14e0c;
     margin: 1.25% 30%;
