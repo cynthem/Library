@@ -44,7 +44,7 @@ function displayLibrary() {
         const rating = document.createElement('i');
         rating.classList.add('fa-solid');
         if (myLibrary[i].rating === 'none') {
-            rating.classList.add('fa-plus');
+            rating.classList.add('fa-plus', 'plus-rating');
         } else if (myLibrary[i].rating === '1') {
             rating.classList.add('fa-1');
         } else if (myLibrary[i].rating === '2') {
@@ -61,7 +61,7 @@ function displayLibrary() {
         const readStatus = document.createElement('i');
         readStatus.classList.add('fa-solid');
         if (myLibrary[i].readStatus === 'none') {
-            readStatus.classList.add('fa-plus');
+            readStatus.classList.add('fa-plus', 'plus-status');
         } else if (myLibrary[i].readStatus === 'read') {
             readStatus.classList.add('fa-circle-check', 'fa-xl');
         } else if (myLibrary[i].readStatus === 'unread') {
@@ -73,7 +73,7 @@ function displayLibrary() {
         // Start date
         if (myLibrary[i].start = 'none') {
             const noStart = document.createElement('i');
-            noStart.classList.add('fa-solid', 'fa-plus');
+            noStart.classList.add('fa-solid', 'fa-plus', 'plus-start');
             listRow.appendChild(noStart);
         } else {
             const start = document.createElement('p');
@@ -83,7 +83,7 @@ function displayLibrary() {
         // End date
         if (myLibrary[i].end = 'none') {
             const noEnd = document.createElement('i');
-            noEnd.classList.add('fa-solid', 'fa-plus');
+            noEnd.classList.add('fa-solid', 'fa-plus', 'plus-end');
             listRow.appendChild(noEnd);
         } else {
             const end = document.createElement('p');
@@ -109,7 +109,9 @@ function updateLibraryStats() {
         if (myLibrary[i].readStatus === 'read') {
             readCounter += 1;
             totalRead.textContent = readCounter;
-        } else if (myLibrary[i].readStatus === 'unread' || myLibrary[i].readStatus === 'wish') {
+        } else if (myLibrary[i].readStatus === 'unread' || 
+                    myLibrary[i].readStatus === 'wish' ||
+                    myLibrary[i].readStatus === 'none') {
             unreadCounter += 1;
             totalUnread.textContent = unreadCounter;
         }
@@ -126,14 +128,22 @@ function handleClicks() {
                     target.classList.contains('fa-2') ||
                     target.classList.contains('fa-3') ||
                     target.classList.contains('fa-4') ||
-                    target.classList.contains('fa-5')) {   
+                    target.classList.contains('fa-5') ||
+                    target.classList.contains('plus-rating')) {   
             changeRating(e);
         } else if (target.classList.contains('fa-circle-xmark') ||
-                    target.classList.contains('fa-bookmark')) {
+                    target.classList.contains('fa-bookmark') ||
+                    target.classList.contains('fa-circle-check') ||
+                    target.classList.contains('plus-status')) {
             changeStatus(e);
         } else if (target.classList.contains('starting') ||
-                    target.classList.contains('ending')) {
-            changeDate(e);
+                    target.classList.contains('plus-start') ||
+                    target.classList.contains('check-start')) {
+            changeStart(e);
+        } else if (target.classList.contains('ending') ||
+                    target.classList.contains('plus-end') ||
+                    target.classList.contains('check-end')) {
+            changeEnd(e);
         } else if (target.classList.contains('fa-trash-can')) {
             removeBook(e);
         }
@@ -145,7 +155,11 @@ function validateForm(e) {}
 function changeRating(e) {
     const { target } = e;
     const changed = target.parentNode;
-    if (target.classList.contains('fa-1')) {
+    if (target.classList.contains('plus-rating')) {
+        target.classList.remove('fa-plus', 'plus-rating');
+        target.classList.add('fa-1');
+        myLibrary[changed].rating = '1';
+    } else if (target.classList.contains('fa-1')) {
         target.classList.replace('fa-1', 'fa-2');
         myLibrary[changed].rating = '2';
     } else if (target.classList.contains('fa-2')) {
@@ -158,8 +172,9 @@ function changeRating(e) {
         target.classList.replace('fa-4', 'fa-5');
         myLibrary[changed].rating = '5';
     } else if (target.classList.contains('fa-5')) {
-        target.classList.replace('fa-5', 'fa-1');
-        myLibrary[changed].rating = '1';
+        target.classList.remove('fa-5');
+        target.classList.add('fa-plus', 'plus-rating');
+        myLibrary[changed].rating = 'none';
     }
     displayLibrary();
 }
@@ -167,21 +182,38 @@ function changeRating(e) {
 function changeStatus(e) {
     const { target } = e;
     const changed = target.parentNode;
-    if (target.classList.contains('fa-circle-xmark')) {
-        target.classList.replace('fa-circle-xmark', 'fa-circle-check');
-        myLibrary[changed].status = 'read';
-    } else if (target.classList.contains('fa-bookmark')) {
-        target.classList.remove('fa-bookmark', 'fa-lg');
+    if (target.classList.contains('plus-status')) {
+        target.classList.remove('fa-plus', 'plus-status');
         target.classList.add('fa-circle-check', 'fa-xl');
         myLibrary[changed].status = 'read';
+    } else if (target.classList.contains('fa-circle-check')) {
+        target.classList.remove('fa-circle-check', 'fa-xl');
+        target.classList.add('fa-bookmark', 'fa-lg');
+        myLibrary[changed].status = 'wish';
+    } else if (target.classList.contains('fa-bookmark')) {
+        target.classList.remove('fa-bookmark', 'fa-lg');
+        target.classList.add('fa-circle-xmark', 'fa-xl');
+        myLibrary[changed].status = 'unread';
+    } else if (target.classList.contains('fa-circle-xmark')) {
+        target.classList.remove('fa-circle-xmark', 'fa-xl');
+        target.classList.add('fa-plus', 'plus-status');
+        myLibrary[changed].status = 'none';
     }
     displayLibrary();
 }
 
-function changeDate(e) {
+function changeStart(e) {
     const { target } = e;
+    const changed = target.parentNode;
+    if (target.classList.contains('starting')) {
+
+    }
 
 }
+
+(target.classList.contains('starting') ||
+                    target.classList.contains('plus-start') ||
+                    target.classList.contains('check-start')) {
 
 function removeBook(e) {
     const removalRow = e.target.parentNode - 1;
