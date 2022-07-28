@@ -10,12 +10,12 @@ function Book() {
 }
 
 // First check storage for pre-existing books
-if (localStorage.getItem('books') === null) {
-    myLibrary = [];
-} else {
-    const storedBooks = JSON.parse(localStorage.getItem('books'));
-    myLibrary = storedBooks;
-}
+//if (localStorage.getItem('books') === null) {
+    //myLibrary = [];
+//} else {
+    //const storedBooks = JSON.parse(localStorage.getItem('books'));
+    //myLibrary = storedBooks;
+//}
 
 function addBookToLibrary(title, author, rating='', readStatus='', start='', end='') {
     const newBook = new Book(title, author, rating, readStatus, start, end);
@@ -24,8 +24,8 @@ function addBookToLibrary(title, author, rating='', readStatus='', start='', end
 }
 
 function displayLibrary() {
-    localStorage.setItem('books', JSON.stringify(myLibrary));
-    updateLibraryStats();
+    //localStorage.setItem('books', JSON.stringify(myLibrary));
+    //updateLibraryStats();
     const listContent = document.querySelector('.main-content');
     listContent.textContent = '';
     for (let i = 0; i < myLibrary.length; i++) {
@@ -75,7 +75,7 @@ function displayLibrary() {
             const noStart = document.createElement('i');
             noStart.classList.add('fa-solid', 'fa-plus', 'plus-start');
             listRow.appendChild(noStart);
-        } else if (myLibrary[i].start !== ''){
+        } else if (myLibrary[i].start !== '') {
             const start = document.createElement('p');
             start.textContent = myLibrary[i].start;
             listRow.appendChild(start);
@@ -155,7 +155,7 @@ function validateForm(e) {
     } else {
         authorError.style.display = 'none';
     }
-    if (ratingInput.value !== '' && ratingInput.value < 0 || 
+    if (ratingInput.value !== '' && ratingInput.value < 1 || 
         ratingInput.value !== '' && ratingInput.value > 5) {
         ratingError.style.display = 'block';
     } else {
@@ -163,7 +163,8 @@ function validateForm(e) {
     }
     if (titleInput.value !== '' &&
         authorInput.value !== '' &&
-        ratingError.style.display !== 'block') {
+        (!ratingInput.value < 1) &&
+        (!ratingInput.value > 5)) {
         if (radioRead.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
         } else if (radioUnread.checked) {
@@ -194,19 +195,19 @@ function changeRating(e) {
     if (target.classList.contains('plus-rating')) {
         target.classList.remove('fa-plus', 'plus-rating');
         target.classList.add('fa-1');
-        myLibrary[changed].rating = '1';
+        myLibrary[changed].rating = 1;
     } else if (target.classList.contains('fa-1')) {
         target.classList.replace('fa-1', 'fa-2');
-        myLibrary[changed].rating = '2';
+        myLibrary[changed].rating = 2;
     } else if (target.classList.contains('fa-2')) {
         target.classList.replace('fa-2', 'fa-3');
-        myLibrary[changed].rating = '3';
+        myLibrary[changed].rating = 3;
     } else if (target.classList.contains('fa-3')) {
         target.classList.replace('fa-3', 'fa-4');
-        myLibrary[changed].rating = '4';
+        myLibrary[changed].rating = 4;
     } else if (target.classList.contains('fa-4')) {
         target.classList.replace('fa-4', 'fa-5');
-        myLibrary[changed].rating = '5';
+        myLibrary[changed].rating = 5;
     } else if (target.classList.contains('fa-5')) {
         target.classList.remove('fa-5');
         target.classList.add('fa-plus', 'plus-rating');
@@ -358,5 +359,5 @@ function updateLibraryStats() {
     totalBooks.textContent = myLibrary.length;
 }
 
-displayLibrary();
-handleClicks();
+//displayLibrary();
+//handleClicks();
