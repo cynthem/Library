@@ -71,21 +71,21 @@ function displayLibrary() {
         }
         listRow.appendChild(readStatus);
         // Start date
-        if (myLibrary[i].start = 'none') {
+        if (myLibrary[i].start === 'none') {
             const noStart = document.createElement('i');
             noStart.classList.add('fa-solid', 'fa-plus', 'plus-start');
             listRow.appendChild(noStart);
-        } else {
+        } else if (myLibrary[i].start !== 'none'){
             const start = document.createElement('p');
             start.textContent = myLibrary[i].start;
             listRow.appendChild(start);
         }
         // End date
-        if (myLibrary[i].end = 'none') {
+        if (myLibrary[i].end === 'none') {
             const noEnd = document.createElement('i');
             noEnd.classList.add('fa-solid', 'fa-plus', 'plus-end');
             listRow.appendChild(noEnd);
-        } else {
+        } else if (myLibrary[i].end !== 'none'){
             const end = document.createElement('p');
             end.textContent = myLibrary[i].end;
             listRow.appendChild(end);
@@ -95,28 +95,6 @@ function displayLibrary() {
         trash.classList.add('fa-solid', 'fa-trash-can');
         listRow.appendChild(trash);
     }
-}
-
-function updateLibraryStats() {
-    const totalRead = document.querySelector('.read-total');
-    const totalUnread = document.querySelector('.unread-total');
-    const totalBooks = document.querySelector('.books-total');
-    let readCounter = 0;
-    let unreadCounter = 0;
-    totalRead.textContent = 0;
-    totalUnread.textContent = 0;
-    for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].readStatus === 'read') {
-            readCounter += 1;
-            totalRead.textContent = readCounter;
-        } else if (myLibrary[i].readStatus === 'unread' || 
-                    myLibrary[i].readStatus === 'wish' ||
-                    myLibrary[i].readStatus === 'none') {
-            unreadCounter += 1;
-            totalUnread.textContent = unreadCounter;
-        }
-    }
-    totalBooks.textContent = myLibrary.length;
 }
 
 function handleClicks() {
@@ -207,44 +185,73 @@ function changeStart(e) {
     const changed = target.parentNode;
     const plusIcon = document.querySelector('.plus-start');
     const dateText = document.querySelector('.starting');
-    const divContainer = document.querySelector('.start-container');
+    const divContainer = document.querySelector('.start-container');   
     const dateInput = document.querySelector('#mainstart');
     const checkIcon = document.querySelector('.check-start');
-    const createIcon = document.createElement('i');
-    const createText = document.createElement('p');
-    const createDiv = document.createElement('div');
-    const createInput = document.createElement('input');
     if (target.classList.contains('plus-start')) {
-
         changed.removeChild(plusIcon);
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('start-container');
         changed.addChild(createDiv);
+        const createInput = document.createElement('input');
+        createInput.type = 'date';
+        createInput.name = 'start-main';
+        createInput.id = 'mainstart';
         createDiv.addChild(createInput);
+        const createIcon = document.createElement('i');
+        createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
         createDiv.addChild(createIcon);
-
     } else if (target.classList.contains('check-start')) {
-
         divContainer.removeChild(checkIcon);
         divContainer.removeChild(dateInput);
         changed.removeChild(divContainer);
+        const createText = document.createElement('p');
+        createText.classList.add('starting');
         changed.addChild(createText);
-        
         myLibrary[changed].start = target.value;
-
     } else if (target.classList.contains('starting')) {
-
         changed.removeChild(dateText);
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('start-container');  
         changed.addChild(createDiv);
+        const createInput = document.createElement('input');
+        createInput.type = 'date';
+        createInput.name = 'start-main';
+        createInput.id = 'mainstart';
         createDiv.addChild(createInput);
+        const createIcon = document.createElement('i');
+        createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
         createDiv.addChild(createIcon);
-
     }
-
+    displayLibrary();
 }
 
 function removeBook(e) {
     const removalRow = e.target.parentNode - 1;
     myLibrary.splice(removalRow, 1);
     displayLibrary();
+}
+
+function updateLibraryStats() {
+    const totalRead = document.querySelector('.read-total');
+    const totalUnread = document.querySelector('.unread-total');
+    const totalBooks = document.querySelector('.books-total');
+    let readCounter = 0;
+    let unreadCounter = 0;
+    totalRead.textContent = 0;
+    totalUnread.textContent = 0;
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].readStatus === 'read') {
+            readCounter += 1;
+            totalRead.textContent = readCounter;
+        } else if (myLibrary[i].readStatus === 'unread' || 
+                    myLibrary[i].readStatus === 'wish' ||
+                    myLibrary[i].readStatus === 'none') {
+            unreadCounter += 1;
+            totalUnread.textContent = unreadCounter;
+        }
+    }
+    totalBooks.textContent = myLibrary.length;
 }
 
 
