@@ -173,10 +173,9 @@ function validateForm(e) {
         } else if (!radioRead.checked && !radioUnread.checked && !radioWish.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
         }
+        detailsForm.reset();
+        statusForm.reset();
     }
-
-
-
     //if (/\d/.test(startInput.value) && startInput.value.includes('m') ||
        ///\d/.test(startInput.value) && startInput.value.includes('d') || 
       //  /\d/.test(startInput.value) && startInput.value.includes('y')) {
@@ -187,13 +186,6 @@ function validateForm(e) {
     //    /\d/.test(endInput.value) && endInput.value.includes('y')) {
     //        endError.classList.remove('invisible');
     //}
-}
-
-const radios = document.querySelectorAll('.radio');
-for (const rad of radios) {
-  rad.onclick = (e) => {
-    console.log(e.target.value);
-  }
 }
 
 function changeRating(e) {
@@ -365,3 +357,6 @@ function updateLibraryStats() {
     }
     totalBooks.textContent = myLibrary.length;
 }
+
+displayLibrary();
+handleClicks();
