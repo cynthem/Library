@@ -17,7 +17,7 @@ if (localStorage.getItem('books') === null) {
     myLibrary = storedBooks;
 }
 
-function addBookToLibrary(title, author, rating, readStatus, start, end) {
+function addBookToLibrary(title, author, rating='', readStatus='', start='', end='') {
     const newBook = new Book(title, author, rating, readStatus, start, end);
     myLibrary.push(newBook);
     displayLibrary();
@@ -43,24 +43,24 @@ function displayLibrary() {
         // Rating
         const rating = document.createElement('i');
         rating.classList.add('fa-solid');
-        if (myLibrary[i].rating === 'none') {
+        if (myLibrary[i].rating === '') {
             rating.classList.add('fa-plus', 'plus-rating');
-        } else if (myLibrary[i].rating === '1') {
+        } else if (myLibrary[i].rating === 1) {
             rating.classList.add('fa-1');
-        } else if (myLibrary[i].rating === '2') {
+        } else if (myLibrary[i].rating === 2) {
             rating.classList.add('fa-2');
-        } else if (myLibrary[i].rating === '3') {
+        } else if (myLibrary[i].rating === 3) {
             rating.classList.add('fa-3');
-        } else if (myLibrary[i].rating === '4') {
+        } else if (myLibrary[i].rating === 4) {
             rating.classList.add('fa-4');
-        } else if (myLibrary[i].rating === '5') {
+        } else if (myLibrary[i].rating === 5) {
             rating.classList.add('fa-5');
         }
         listRow.appendChild(rating);
         // Status
         const readStatus = document.createElement('i');
         readStatus.classList.add('fa-solid');
-        if (myLibrary[i].readStatus === 'none') {
+        if (myLibrary[i].readStatus === '') {
             readStatus.classList.add('fa-plus', 'plus-status');
         } else if (myLibrary[i].readStatus === 'read') {
             readStatus.classList.add('fa-circle-check', 'fa-xl');
@@ -71,21 +71,21 @@ function displayLibrary() {
         }
         listRow.appendChild(readStatus);
         // Start date
-        if (myLibrary[i].start === 'none') {
+        if (myLibrary[i].start === '') {
             const noStart = document.createElement('i');
             noStart.classList.add('fa-solid', 'fa-plus', 'plus-start');
             listRow.appendChild(noStart);
-        } else if (myLibrary[i].start !== 'none'){
+        } else if (myLibrary[i].start !== ''){
             const start = document.createElement('p');
             start.textContent = myLibrary[i].start;
             listRow.appendChild(start);
         }
         // End date
-        if (myLibrary[i].end === 'none') {
+        if (myLibrary[i].end === '') {
             const noEnd = document.createElement('i');
             noEnd.classList.add('fa-solid', 'fa-plus', 'plus-end');
             listRow.appendChild(noEnd);
-        } else if (myLibrary[i].end !== 'none'){
+        } else if (myLibrary[i].end !== ''){
             const end = document.createElement('p');
             end.textContent = myLibrary[i].end;
             listRow.appendChild(end);
@@ -139,9 +139,61 @@ function validateForm(e) {
     const ratingInput = document.getElementById('rating');
     const ratingError = document.querySelector('.rating-error');
     const startInput = document.getElementById('start');
-    const startError = document.querySelector('.start-error');
+    //const startError = document.querySelector('.start-error');
     const endInput = document.getElementById('end');
-    const endError = document.querySelector('.end-error');
+    //const endError = document.querySelector('.end-error');
+    const radioRead = document.getElementById('read');
+    const radioUnread = document.getElementById('currently');
+    const radioWish = document.getElementById('planning');
+    if (titleInput.value === '') {
+        titleError.style.display = 'block';
+    } else {
+        titleError.style.display = 'none';
+    }
+    if (authorInput.value === '') {
+        authorError.style.display = 'block';
+    } else {
+        authorError.style.display = 'none';
+    }
+    if (ratingInput.value !== '' && ratingInput.value < 0 || 
+        ratingInput.value !== '' && ratingInput.value > 5) {
+        ratingError.style.display = 'block';
+    } else {
+        ratingError.style.display = 'none';
+    }
+    if (titleInput.value !== '' &&
+        authorInput.value !== '' &&
+        ratingError.style.display !== 'block') {
+        if (radioRead.checked) {
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
+        } else if (radioUnread.checked) {
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
+        } else if (radioWish.checked) {
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
+        } else if (!radioRead.checked && !radioUnread.checked && !radioWish.checked) {
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
+        }
+    }
+
+
+
+    //if (/\d/.test(startInput.value) && startInput.value.includes('m') ||
+       ///\d/.test(startInput.value) && startInput.value.includes('d') || 
+      //  /\d/.test(startInput.value) && startInput.value.includes('y')) {
+      //      startError.classList.remove('invisible');
+    //}
+    //if (/\d/.test(endInput.value) && endInput.value.includes('m') ||
+    //    /\d/.test(endInput.value) && endInput.value.includes('d') || 
+    //    /\d/.test(endInput.value) && endInput.value.includes('y')) {
+    //        endError.classList.remove('invisible');
+    //}
+}
+
+const radios = document.querySelectorAll('.radio');
+for (const rad of radios) {
+  rad.onclick = (e) => {
+    console.log(e.target.value);
+  }
 }
 
 function changeRating(e) {
@@ -166,7 +218,7 @@ function changeRating(e) {
     } else if (target.classList.contains('fa-5')) {
         target.classList.remove('fa-5');
         target.classList.add('fa-plus', 'plus-rating');
-        myLibrary[changed].rating = 'none';
+        myLibrary[changed].rating = '';
     }
     displayLibrary();
 }
@@ -189,7 +241,7 @@ function changeStatus(e) {
     } else if (target.classList.contains('fa-circle-xmark')) {
         target.classList.remove('fa-circle-xmark', 'fa-xl');
         target.classList.add('fa-plus', 'plus-status');
-        myLibrary[changed].status = 'none';
+        myLibrary[changed].status = '';
     }
     displayLibrary();
 }
@@ -306,15 +358,10 @@ function updateLibraryStats() {
             totalRead.textContent = readCounter;
         } else if (myLibrary[i].readStatus === 'unread' || 
                     myLibrary[i].readStatus === 'wish' ||
-                    myLibrary[i].readStatus === 'none') {
+                    myLibrary[i].readStatus === '') {
             unreadCounter += 1;
             totalUnread.textContent = unreadCounter;
         }
     }
     totalBooks.textContent = myLibrary.length;
 }
-
-
-
-
-            
