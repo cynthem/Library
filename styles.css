@@ -278,19 +278,18 @@ h2 {
     font-size: 1.15vw;
 }
 
-.fa-trash-can {
-    position: absolute;
-    right: 3%;
-    opacity: 0;
-    padding: 15px;
+#mainstart,
+#mainend {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eaebeb;
+    font-size: 16px;
+    padding-left: 10px;
 }
 
-.list-item:hover > .fa-trash-can {
-    opacity: 1;
-}
-
-.fa-trash-can:hover {
-    opacity: 1;
+.invisible {
+    display: none;
 }
 
 .fa-circle-xmark {
@@ -305,8 +304,19 @@ h2 {
     color: #efefa6;
 }
 
-.invisible {
-    display: none;
+.fa-trash-can {
+    position: absolute;
+    right: 3%;
+    opacity: 0;
+    padding: 15px;
+}
+
+.list-item:hover > .fa-trash-can {
+    opacity: 1;
+}
+
+.fa-trash-can:hover {
+    opacity: 1;
 }
 
 .main-footer {
