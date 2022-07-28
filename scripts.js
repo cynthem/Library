@@ -130,7 +130,18 @@ function handleClicks() {
 
 function validateForm(e) {
     e.preventDefault();
-    
+    const detailsForm = document.querySelector('.details-form');
+    const statusForm = document.querySelector('.status-form');
+    const titleInput = document.getElementById('title');
+    const titleError = document.querySelector('.title-error');
+    const authorInput = document.getElementById('author');
+    const authorError = document.querySelector('.author-error');
+    const ratingInput = document.getElementById('rating');
+    const ratingError = document.querySelector('.rating-error');
+    const startInput = document.getElementById('start');
+    const startError = document.querySelector('.start-error');
+    const endInput = document.getElementById('end');
+    const endError = document.querySelector('.end-error');
 }
 
 function changeRating(e) {
