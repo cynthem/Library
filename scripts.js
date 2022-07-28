@@ -226,6 +226,52 @@ function changeStart(e) {
     displayLibrary();
 }
 
+function changeEnd(e) {
+    const { target } = e;
+    const changed = target.parentNode;
+    const plusIcon = document.querySelector('.plus-end');
+    const dateText = document.querySelector('.ending');
+    const divContainer = document.querySelector('.end-container');   
+    const dateInput = document.querySelector('#mainend');
+    const checkIcon = document.querySelector('.check-end');
+    if (target.classList.contains('plus-end')) {
+        changed.removeChild(plusIcon);
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('end-container');
+        changed.addChild(createDiv);
+        const createInput = document.createElement('input');
+        createInput.type = 'date';
+        createInput.name = 'end-main';
+        createInput.id = 'mainend';
+        createDiv.addChild(createInput);
+        const createIcon = document.createElement('i');
+        createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
+        createDiv.addChild(createIcon);
+    } else if (target.classList.contains('check-end')) {
+        divContainer.removeChild(checkIcon);
+        divContainer.removeChild(dateInput);
+        changed.removeChild(divContainer);
+        const createText = document.createElement('p');
+        createText.classList.add('ending');
+        changed.addChild(createText);
+        myLibrary[changed].start = target.value;
+    } else if (target.classList.contains('ending')) {
+        changed.removeChild(dateText);
+        const createDiv = document.createElement('div');
+        createDiv.classList.add('end-container');  
+        changed.addChild(createDiv);
+        const createInput = document.createElement('input');
+        createInput.type = 'date';
+        createInput.name = 'end-main';
+        createInput.id = 'mainend';
+        createDiv.addChild(createInput);
+        const createIcon = document.createElement('i');
+        createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
+        createDiv.addChild(createIcon);
+    }
+    displayLibrary();
+}
+
 function removeBook(e) {
     const removalRow = e.target.parentNode - 1;
     myLibrary.splice(removalRow, 1);
