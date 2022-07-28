@@ -143,6 +143,11 @@ input::placeholder {
     padding-left: 5px;
     letter-spacing: 0.02em;
     position: absolute;
+    display: none;
+}
+
+.invisible {
+    display: none;
 }
 
 sup {
@@ -291,10 +296,6 @@ h2 {
     align-items: center;
     border-bottom: 2px double black;
     font-size: 1.15vw;
-}
-
-.invisible {
-    display: none;
 }
 
 .fa-circle-xmark {
