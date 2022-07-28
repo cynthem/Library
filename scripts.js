@@ -205,15 +205,41 @@ function changeStatus(e) {
 function changeStart(e) {
     const { target } = e;
     const changed = target.parentNode;
-    if (target.classList.contains('starting')) {
+    const plusIcon = document.querySelector('.plus-start');
+    const dateText = document.querySelector('.starting');
+    const divContainer = document.querySelector('.start-container');
+    const dateInput = document.querySelector('#mainstart');
+    const checkIcon = document.querySelector('.check-start');
+    const createIcon = document.createElement('i');
+    const createText = document.createElement('p');
+    const createDiv = document.createElement('div');
+    const createInput = document.createElement('input');
+    if (target.classList.contains('plus-start')) {
+
+        changed.removeChild(plusIcon);
+        changed.addChild(createDiv);
+        createDiv.addChild(createInput);
+        createDiv.addChild(createIcon);
+
+    } else if (target.classList.contains('check-start')) {
+
+        divContainer.removeChild(checkIcon);
+        divContainer.removeChild(dateInput);
+        changed.removeChild(divContainer);
+        changed.addChild(createText);
+        
+        myLibrary[changed].start = target.value;
+
+    } else if (target.classList.contains('starting')) {
+
+        changed.removeChild(dateText);
+        changed.addChild(createDiv);
+        createDiv.addChild(createInput);
+        createDiv.addChild(createIcon);
 
     }
 
 }
-
-(target.classList.contains('starting') ||
-                    target.classList.contains('plus-start') ||
-                    target.classList.contains('check-start')) {
 
 function removeBook(e) {
     const removalRow = e.target.parentNode - 1;
