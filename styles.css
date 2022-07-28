@@ -293,25 +293,6 @@ h2 {
     font-size: 1.15vw;
 }
 
-#mainstart,
-#mainend {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #eaebeb;
-    font-size: 14px;
-}
-
-.start-container,
-.end-container {
-    display: flex;
-    gap: 10px;
-}
-
-.fa-check {
-    color: #efefa6;
-}
-
 .invisible {
     display: none;
 }
@@ -325,6 +306,25 @@ h2 {
 }
 
 .fa-bookmark {
+    color: #efefa6;
+}
+
+.start-container,
+.end-container {
+    display: flex;
+    gap: 10px;
+}
+
+#mainstart,
+#mainend {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #eaebeb;
+    font-size: 14px;
+}
+
+.fa-check {
     color: #efefa6;
 }
 
