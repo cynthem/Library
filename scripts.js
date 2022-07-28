@@ -100,3 +100,27 @@ function updateLibraryStats() {
     }
     totalBooks.textContent = myLibrary.length;
 }
+
+function handleClicks() {
+    document.addEventListener('click', (e) => {
+        const { target } = e;
+        if (target.classList.contains('add-book')) {
+            validateForm(e);
+        } else if (target.classList.contains('fa-1')) {
+            target.classList.replace('fa-1', 'fa-2');
+        } else if (target.classList.contains('fa-2')) {
+            target.classList.replace('fa-2', 'fa-3');
+        } else if (target.classList.contains('fa-3')) {
+            target.classList.replace('fa-3', 'fa-4');
+        } else if (target.classList.contains('fa-4')) {
+            target.classList.replace('fa-4', 'fa-5');
+        } else if (target.classList.contains('fa-5')) {
+            target.classList.replace('fa-5', 'fa-1');
+        } else if (target.classList.contains('fa-circle-xmark')) {
+            target.classList.replace('fa-circle-xmark', 'fa-circle-check');
+        } else if (target.classList.contains('fa-bookmark')) {
+            target.classList.remove('fa-bookmark', 'fa-lg');
+            target.classList.add('fa-circle-check', 'fa-xl');
+        }
+    })
+}
