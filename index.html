@@ -41,12 +41,12 @@
                 <div class="sidebar-forms">
                     <form class="details-form">
                         <div class="title-input">
-                            <input type="text" name="title" placeholder="Enter title (required)" required>
-                            <p class="title-error">*Book title is required.</p>
+                            <input type="text" name="title" placeholder="Enter title (required)" id="title" required>
+                            <p class="title-error invisible">*Book title is required.</p>
                         </div>
                         <div class="author-input">
-                            <input type="text" name="author" placeholder="Enter author (required)" required>
-                            <p class="author-error">*Author is required.</p>
+                            <input type="text" name="author" placeholder="Enter author (required)" id="author" required>
+                            <p class="author-error invisible">*Author is required.</p>
                         </div>
                         <div class="rating-input">
                             <label for="rating">Rating: 
@@ -57,19 +57,19 @@
                                 </sup>
                                 <input type="number" name="rating" id="rating" min="1" max="5">
                             </label>
-                            <p class="rating-error">*Rating must be from 1 to 5.</p>
+                            <p class="rating-error invisible">*Rating must be from 1 to 5.</p>
                         </div>
                         <div class="start-input">
                             <label for="start">Reading start date:
                                 <input type="date" name="start" id="start" class="start-date">
                             </label>
-                            <p class="start-error">*Enter a complete date.</p>
+                            <p class="start-error invisible">*Enter a complete date.</p>
                         </div>
                         <div class="end-input">
                             <label for="end">Reading end date:
                                 <input type="date" name="end" id="end" class="end-date">
                             </label>
-                            <p class="end-error">*Enter a complete date.</p>
+                            <p class="end-error invisible">*Enter a complete date.</p>
                         </div>
                     </form>
                     <form class="status-form">
