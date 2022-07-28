@@ -281,11 +281,16 @@ h2 {
 .fa-trash-can {
     position: absolute;
     right: 3%;
-    visibility: hidden;
+    opacity: 0;
+    padding: 15px;
 }
 
 .list-item:hover > .fa-trash-can {
-    visibility: visible;
+    opacity: 1;
+}
+
+.fa-trash-can:hover {
+    opacity: 1;
 }
 
 .fa-circle-xmark {
