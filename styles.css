@@ -284,8 +284,17 @@ h2 {
     border: none;
     outline: none;
     color: #eaebeb;
-    font-size: 16px;
-    padding-left: 10px;
+    font-size: 14px;
+}
+
+.start-container,
+.end-container {
+    display: flex;
+    gap: 10px;
+}
+
+.fa-check {
+    color: #efefa6;
 }
 
 .invisible {
