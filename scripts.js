@@ -17,7 +17,7 @@ if (localStorage.getItem('books') === null) {
     myLibrary = storedBooks;
 }
 
-function addBookToLibrary(title, author, rating=0, readStatus=0, start=0, end=0) {
+function addBookToLibrary(title, author, rating, readStatus, start, end) {
     const newBook = new Book(title, author, rating, readStatus, start, end);
     myLibrary.push(newBook);
     displayLibrary();
@@ -43,22 +43,26 @@ function displayLibrary() {
         // Rating
         const rating = document.createElement('i');
         rating.classList.add('fa-solid');
-        if (myLibrary[i].rating === 1) {
+        if (myLibrary[i].rating === 'none') {
+            rating.classList.add('fa-plus');
+        } else if (myLibrary[i].rating === '1') {
             rating.classList.add('fa-1');
-        } else if (myLibrary[i].rating === 2) {
+        } else if (myLibrary[i].rating === '2') {
             rating.classList.add('fa-2');
-        } else if (myLibrary[i].rating === 3) {
+        } else if (myLibrary[i].rating === '3') {
             rating.classList.add('fa-3');
-        } else if (myLibrary[i].rating === 4) {
+        } else if (myLibrary[i].rating === '4') {
             rating.classList.add('fa-4');
-        } else if (myLibrary[i].rating === 5) {
+        } else if (myLibrary[i].rating === '5') {
             rating.classList.add('fa-5');
         }
         listRow.appendChild(rating);
         // Status
         const readStatus = document.createElement('i');
         readStatus.classList.add('fa-solid');
-        if (myLibrary[i].readStatus === 'read') {
+        if (myLibrary[i].readStatus === 'none') {
+            readStatus.classList.add('fa-plus');
+        } else if (myLibrary[i].readStatus === 'read') {
             readStatus.classList.add('fa-circle-check', 'fa-xl');
         } else if (myLibrary[i].readStatus === 'unread') {
             readStatus.classList.add('fa-circle-xmark', 'fa-xl');
@@ -67,13 +71,25 @@ function displayLibrary() {
         }
         listRow.appendChild(readStatus);
         // Start date
-        const start = document.createElement('p');
-        start.textContent = myLibrary[i].start;
-        listRow.appendChild(start);
+        if (myLibrary[i].start = 'none') {
+            const noStart = document.createElement('i');
+            noStart.classList.add('fa-solid', 'fa-plus');
+            listRow.appendChild(noStart);
+        } else {
+            const start = document.createElement('p');
+            start.textContent = myLibrary[i].start;
+            listRow.appendChild(start);
+        }
         // End date
-        const end = document.createElement('p');
-        end.textContent = myLibrary[i].end;
-        listRow.appendChild(end);
+        if (myLibrary[i].end = 'none') {
+            const noEnd = document.createElement('i');
+            noEnd.classList.add('fa-solid', 'fa-plus');
+            listRow.appendChild(noEnd);
+        } else {
+            const end = document.createElement('p');
+            end.textContent = myLibrary[i].end;
+            listRow.appendChild(end);
+        }
         // Trash
         const trash = document.createElement('i');
         trash.classList.add('fa-solid', 'fa-trash-can');
