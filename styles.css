@@ -25,8 +25,6 @@
          url('./resources/fonts/merriweather/merriweather-v30-latin-italic.svg#Merriweather') format('svg'); /* Legacy iOS */
 }
 
-
-
 *,
 *::before,
 *::after {
@@ -47,23 +45,16 @@ body {
     color: #eaebeb;
 }
 
+
+/* Sidebar */
+
 .sidebar {
     grid-column: span 1;
     background-color: #a14e0c;
     height: 100vh;
     display: grid;
-    grid-template-rows: clamp(100px, 20%, 175px) 1fr 50px;
+    grid-template-rows: clamp(100px, 17%, 175px) 1fr 50px;
 }
-
-.main {
-    grid-column: span 3;
-    height: 100vh;
-    display: grid;
-    grid-template-rows: clamp(100px, 20%, 175px) 1fr 70px;
-}
-
-
-/* Sidebar */
 
 .sidebar-title {
     display: grid;
@@ -83,7 +74,7 @@ h1 {
 .sidebar-content {
     padding: 8%;
     display: grid;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 75px 1fr;
     overflow-y: scroll;
     font-size: 1.25vw;
 }
@@ -119,14 +110,6 @@ button:active {
     margin-top: 10%;
 }
 
-.status-form {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    gap: 4px;
-    margin: 30px 1% 0 7%;
-    font-size: 1.15vw;
-}
-
 .details-form input[type=text],
 .details-form input[type=number],
 .details-form input[type=date] {
@@ -149,10 +132,6 @@ sup {
     position: relative;
 }
 
-.fa-circle-question:hover {
-    cursor: pointer;
-}
-
 .rating-info {
     position: absolute;
     bottom: 20px;
@@ -168,6 +147,10 @@ sup {
     font-style: italic;
     letter-spacing: 0.02em;
     visibility: hidden;
+}
+
+.fa-circle-question:hover {
+    cursor: pointer;
 }
 
 .fa-circle-question:hover > .rating-info {
@@ -187,6 +170,14 @@ sup {
 
 .end-date {
     margin-left: 1.3vw;
+}
+
+.status-form {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    margin: 30px 1% 0 7%;
+    font-size: 1.15vw;
 }
 
 label > input[type=checkbox] {
@@ -243,6 +234,13 @@ a:active {
 
 
 /* Main */
+
+.main {
+    grid-column: span 3;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: clamp(100px, 20%, 175px) 1fr 70px;
+}
 
 .main-header {
     background-color: #a14e0c;
