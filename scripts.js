@@ -128,7 +128,10 @@ function handleClicks() {
     })
 }
 
-function validateForm(e) {}
+function validateForm(e) {
+    e.preventDefault();
+    
+}
 
 function changeRating(e) {
     const { target } = e;
