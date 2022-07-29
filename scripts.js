@@ -79,6 +79,7 @@ function displayLibrary() {
             listRow.appendChild(noStart);
         } else if (myLibrary[i].start !== '') {
             const start = document.createElement('p');
+            start.classList.add('starting');
             start.textContent = myLibrary[i].start;
             listRow.appendChild(start);
         }
@@ -89,6 +90,7 @@ function displayLibrary() {
             listRow.appendChild(noEnd);
         } else if (myLibrary[i].end !== ''){
             const end = document.createElement('p');
+            end.classList.add('ending');
             end.textContent = myLibrary[i].end;
             listRow.appendChild(end);
         }
@@ -141,9 +143,7 @@ function validateForm(e) {
     const ratingInput = document.getElementById('rating');
     const ratingError = document.querySelector('.rating-error');
     const startInput = document.getElementById('start');
-    //const startError = document.querySelector('.start-error');
     const endInput = document.getElementById('end');
-    //const endError = document.querySelector('.end-error');
     const radioRead = document.getElementById('read');
     const radioUnread = document.getElementById('currently');
     const radioWish = document.getElementById('planning');
@@ -158,28 +158,29 @@ function validateForm(e) {
     } else {
         authorError.style.display = 'none';
     }
-    if (ratingInput.value !== '' && ratingInput.value < 1 || 
-        ratingInput.value !== '' && ratingInput.value > 5) {
+    if (ratingInput.value !== '' && ratingInput.value !== '1' && 
+        ratingInput.value !== '2' && ratingInput.value !== '3' &&
+        ratingInput.value !== '4' && ratingInput.value !== '5') {
         ratingError.style.display = 'block';
     } else {
         ratingError.style.display = 'none';
     }
-    if (titleInput.value !== '' &&
-        authorInput.value !== '' //&&
-        //(!ratingInput.value < 1) &&
-        //(!ratingInput.value > 5)
-        ) {
-        if (radioRead.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
-        } else if (radioUnread.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
-        } else if (radioWish.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
-        } else if (radioNone.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value);
+    if (titleInput.value !== '' && authorInput.value !== '') {
+        if (ratingInput.value === '' || ratingInput.value === '1' || 
+        ratingInput.value === '2' || ratingInput.value === '3' ||
+        ratingInput.value === '4' || ratingInput.value === '5') {
+            if (radioRead.checked) {
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
+            } else if (radioUnread.checked) {
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
+            } else if (radioWish.checked) {
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
+            } else if (radioNone.checked) {
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value);
+            }
+            detailsForm.reset();
+            statusForm.reset();
         }
-        detailsForm.reset();
-        statusForm.reset();
     }
 }
 
@@ -255,13 +256,16 @@ function changeStart(e) {
         createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
         createDiv.addChild(createIcon);
     } else if (target.classList.contains('check-start')) {
+        const newStart = dateInput.value;
         divContainer.removeChild(checkIcon);
         divContainer.removeChild(dateInput);
         changed.removeChild(divContainer);
         const createText = document.createElement('p');
         createText.classList.add('starting');
+        createText.textContent = newStart;
         changed.addChild(createText);
-        myLibrary[changed].start = target.value;
+        myLibrary[changed].start = newStart;
+        displayLibrary();
     } else if (target.classList.contains('starting')) {
         changed.removeChild(dateText);
         const createDiv = document.createElement('div');
@@ -276,7 +280,6 @@ function changeStart(e) {
         createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
         createDiv.addChild(createIcon);
     }
-    displayLibrary();
 }
 
 function changeEnd(e) {
@@ -301,13 +304,16 @@ function changeEnd(e) {
         createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
         createDiv.addChild(createIcon);
     } else if (target.classList.contains('check-end')) {
+        const newEnd = dateInput.value;
         divContainer.removeChild(checkIcon);
         divContainer.removeChild(dateInput);
         changed.removeChild(divContainer);
         const createText = document.createElement('p');
         createText.classList.add('ending');
+        createText.textContent = newEnd;
         changed.addChild(createText);
-        myLibrary[changed].start = target.value;
+        myLibrary[changed].end = newEnd;
+        displayLibrary();
     } else if (target.classList.contains('ending')) {
         changed.removeChild(dateText);
         const createDiv = document.createElement('div');
@@ -322,7 +328,6 @@ function changeEnd(e) {
         createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
         createDiv.addChild(createIcon);
     }
-    displayLibrary();
 }
 
 function removeBook(e) {
