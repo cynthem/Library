@@ -1,13 +1,14 @@
 let myLibrary = [];
 
 class Book {
-    constructor(title, author, rating, readStatus, start, end) {
+    constructor(title, author, rating='none', readStatus='none', start='', end='', id) {
         this.title = title;
         this.author = author;
         this.rating = rating;
         this.readStatus = readStatus;
         this.start = start;
         this.end = end;
+        this.id = id;
     }
 }
 
@@ -19,8 +20,8 @@ class Book {
     //myLibrary = storedBooks;
 //}
 
-function addBookToLibrary(title, author, rating, readStatus, start, end) {
-    const newBook = new Book(title, author, rating, readStatus, start, end);
+function addBookToLibrary(title, author, rating, readStatus, start, end, id) {
+    const newBook = new Book(title, author, rating, readStatus, start, end, id);
     myLibrary.push(newBook);
     displayLibrary();
 }
@@ -134,6 +135,7 @@ function handleClicks() {
 
 function validateForm(e) {
     e.preventDefault();
+    const idNum = generateId();
     const detailsForm = document.querySelector('.details-form');
     const statusForm = document.querySelector('.status-form');
     const titleInput = document.getElementById('title');
@@ -170,17 +172,26 @@ function validateForm(e) {
         ratingInput.value === '2' || ratingInput.value === '3' ||
         ratingInput.value === '4' || ratingInput.value === '5') {
             if (radioRead.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value, idNum);
             } else if (radioUnread.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value, idNum);
             } else if (radioWish.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value, idNum);
             } else if (radioNone.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value, idNum);
             }
             detailsForm.reset();
             statusForm.reset();
         }
+    }
+}
+
+function generateId() {
+    if (myLibrary) {
+        let lastBook = myLibrary[myLibrary.length - 1];
+        return lastBook.id + 1;
+    } else {
+        return 1;
     }
 }
 
@@ -213,7 +224,7 @@ function changeRating(e) {
 
 function changeStatus(e) {
     const { target } = e;
-    const changed = target.parentNode;
+    const changed = indexOf(target.parentNode);
     if (target.classList.contains('plus-status')) {
         target.classList.remove('fa-plus', 'plus-status');
         target.classList.add('fa-circle-check', 'fa-xl');
@@ -243,9 +254,9 @@ function changeStart(e) {
     const dateInput = document.querySelector('#mainstart');
     const checkIcon = document.querySelector('.check-start');
     if (target.classList.contains('plus-start')) {
-        changed.removeChild(plusIcon);
         const createDiv = document.createElement('div');
         createDiv.classList.add('start-container');
+        changed.removeChild(plusIcon);
         changed.addChild(createDiv);
         const createInput = document.createElement('input');
         createInput.type = 'date';
@@ -259,17 +270,17 @@ function changeStart(e) {
         const newStart = dateInput.value;
         divContainer.removeChild(checkIcon);
         divContainer.removeChild(dateInput);
-        changed.removeChild(divContainer);
         const createText = document.createElement('p');
         createText.classList.add('starting');
         createText.textContent = newStart;
+        changed.removeChild(divContainer);
         changed.addChild(createText);
         myLibrary[changed].start = newStart;
         displayLibrary();
     } else if (target.classList.contains('starting')) {
-        changed.removeChild(dateText);
         const createDiv = document.createElement('div');
         createDiv.classList.add('start-container');  
+        changed.removeChild(dateText);
         changed.addChild(createDiv);
         const createInput = document.createElement('input');
         createInput.type = 'date';
@@ -360,3 +371,7 @@ function updateLibraryStats() {
 
 displayLibrary();
 handleClicks();
+
+document.onclick = () => {
+    console.log(myLibrary);
+}
