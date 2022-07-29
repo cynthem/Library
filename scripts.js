@@ -1,39 +1,39 @@
 let myLibrary = [];
 
 class Book {
-    constructor(title, author, rating='none', readStatus='none', start='', end='', id) {
+    constructor(title, author, rating='', readStatus='', start='', end='') {
         this.title = title;
         this.author = author;
         this.rating = rating;
         this.readStatus = readStatus;
         this.start = start;
         this.end = end;
-        this.id = id;
     }
 }
 
 // First check storage for pre-existing books
-//if (localStorage.getItem('books') === null) {
-    //myLibrary = [];
-//} else {
-    //const storedBooks = JSON.parse(localStorage.getItem('books'));
-    //myLibrary = storedBooks;
-//}
+if (localStorage.getItem('books') === null) {
+    myLibrary = [];
+} else {
+    const storedBooks = JSON.parse(localStorage.getItem('books'));
+    myLibrary = storedBooks;
+}
 
-function addBookToLibrary(title, author, rating, readStatus, start, end, id) {
-    const newBook = new Book(title, author, rating, readStatus, start, end, id);
+function addBookToLibrary(title, author, rating, readStatus, start, end) {
+    const newBook = new Book(title, author, rating, readStatus, start, end);
     myLibrary.push(newBook);
     displayLibrary();
 }
 
 function displayLibrary() {
-    //localStorage.setItem('books', JSON.stringify(myLibrary));
-    //updateLibraryStats();
+    localStorage.setItem('books', JSON.stringify(myLibrary));
+    updateLibraryStats();
     const listContent = document.querySelector('.main-content');
     listContent.textContent = '';
     for (let i = 0; i < myLibrary.length; i++) {
         const listRow = document.createElement('div');
         listRow.classList.add('list-item');
+        listRow.id = `${i}`;
         listContent.appendChild(listRow);
         // Title
         const title = document.createElement('p');
@@ -135,7 +135,6 @@ function handleClicks() {
 
 function validateForm(e) {
     e.preventDefault();
-    const idNum = generateId();
     const detailsForm = document.querySelector('.details-form');
     const statusForm = document.querySelector('.status-form');
     const titleInput = document.getElementById('title');
@@ -172,13 +171,13 @@ function validateForm(e) {
         ratingInput.value === '2' || ratingInput.value === '3' ||
         ratingInput.value === '4' || ratingInput.value === '5') {
             if (radioRead.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value, idNum);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
             } else if (radioUnread.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value, idNum);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
             } else if (radioWish.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value, idNum);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
             } else if (radioNone.checked) {
-                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value, idNum);
+                addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value);
             }
             detailsForm.reset();
             statusForm.reset();
@@ -186,18 +185,9 @@ function validateForm(e) {
     }
 }
 
-function generateId() {
-    if (myLibrary) {
-        let lastBook = myLibrary[myLibrary.length - 1];
-        return lastBook.id + 1;
-    } else {
-        return 1;
-    }
-}
-
 function changeRating(e) {
     const { target } = e;
-    const changed = target.parentNode;
+    const changed = target.parentNode.id;
     if (target.classList.contains('plus-rating')) {
         target.classList.remove('fa-plus', 'plus-rating');
         target.classList.add('fa-1');
@@ -224,23 +214,23 @@ function changeRating(e) {
 
 function changeStatus(e) {
     const { target } = e;
-    const changed = indexOf(target.parentNode);
+    const changed = target.parentNode.id;
     if (target.classList.contains('plus-status')) {
         target.classList.remove('fa-plus', 'plus-status');
         target.classList.add('fa-circle-check', 'fa-xl');
-        myLibrary[changed].status = 'read';
+        myLibrary[changed].readStatus = 'read';
     } else if (target.classList.contains('fa-circle-check')) {
         target.classList.remove('fa-circle-check', 'fa-xl');
         target.classList.add('fa-bookmark', 'fa-lg');
-        myLibrary[changed].status = 'wish';
+        myLibrary[changed].readStatus = 'wish';
     } else if (target.classList.contains('fa-bookmark')) {
         target.classList.remove('fa-bookmark', 'fa-lg');
         target.classList.add('fa-circle-xmark', 'fa-xl');
-        myLibrary[changed].status = 'unread';
+        myLibrary[changed].readStatus = 'unread';
     } else if (target.classList.contains('fa-circle-xmark')) {
         target.classList.remove('fa-circle-xmark', 'fa-xl');
         target.classList.add('fa-plus', 'plus-status');
-        myLibrary[changed].status = 'none';
+        myLibrary[changed].readStatus = 'none';
     }
     displayLibrary();
 }
@@ -248,96 +238,71 @@ function changeStatus(e) {
 function changeStart(e) {
     const { target } = e;
     const changed = target.parentNode;
-    const plusIcon = document.querySelector('.plus-start');
-    const dateText = document.querySelector('.starting');
+    const changedCheck = target.parentNode.parentNode;
+    const index = target.parentNode.parentNode.id;
     const divContainer = document.querySelector('.start-container');   
     const dateInput = document.querySelector('#mainstart');
-    const checkIcon = document.querySelector('.check-start');
+    const createDiv = document.createElement('div');
+    createDiv.classList.add('start-container');
+    const createInput = document.createElement('input');
+    createInput.type = 'date';
+    createInput.name = 'start-main';
+    createInput.id = 'mainstart';
+    const createIcon = document.createElement('i');
+    createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
     if (target.classList.contains('plus-start')) {
-        const createDiv = document.createElement('div');
-        createDiv.classList.add('start-container');
-        changed.removeChild(plusIcon);
-        changed.addChild(createDiv);
-        const createInput = document.createElement('input');
-        createInput.type = 'date';
-        createInput.name = 'start-main';
-        createInput.id = 'mainstart';
-        createDiv.addChild(createInput);
-        const createIcon = document.createElement('i');
-        createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
-        createDiv.addChild(createIcon);
+        createDiv.appendChild(createInput);
+        createDiv.appendChild(createIcon);
+        changed.replaceChild(createDiv, target);
     } else if (target.classList.contains('check-start')) {
         const newStart = dateInput.value;
-        divContainer.removeChild(checkIcon);
-        divContainer.removeChild(dateInput);
+        myLibrary[index].start = newStart;
         const createText = document.createElement('p');
         createText.classList.add('starting');
-        createText.textContent = newStart;
-        changed.removeChild(divContainer);
-        changed.addChild(createText);
-        myLibrary[changed].start = newStart;
+        createText.textContent = myLibrary[index].start;
+        divContainer.removeChild(target);
+        divContainer.removeChild(dateInput);
+        changedCheck.replaceChild(createText, divContainer);
         displayLibrary();
     } else if (target.classList.contains('starting')) {
-        const createDiv = document.createElement('div');
-        createDiv.classList.add('start-container');  
-        changed.removeChild(dateText);
-        changed.addChild(createDiv);
-        const createInput = document.createElement('input');
-        createInput.type = 'date';
-        createInput.name = 'start-main';
-        createInput.id = 'mainstart';
-        createDiv.addChild(createInput);
-        const createIcon = document.createElement('i');
-        createIcon.classList.add('fa-solid', 'fa-check', 'check-start');
-        createDiv.addChild(createIcon);
+        createDiv.appendChild(createInput);
+        createDiv.appendChild(createIcon);
+        changed.replaceChild(createDiv, target);
     }
 }
 
 function changeEnd(e) {
     const { target } = e;
     const changed = target.parentNode;
-    const plusIcon = document.querySelector('.plus-end');
-    const dateText = document.querySelector('.ending');
+    const changedCheck = target.parentNode.parentNode;
+    const index = target.parentNode.parentNode.id;
     const divContainer = document.querySelector('.end-container');   
     const dateInput = document.querySelector('#mainend');
-    const checkIcon = document.querySelector('.check-end');
+    const createDiv = document.createElement('div');
+    createDiv.classList.add('end-container');
+    const createInput = document.createElement('input');
+    createInput.type = 'date';
+    createInput.name = 'end-main';
+    createInput.id = 'mainend';
+    const createIcon = document.createElement('i');
+    createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
     if (target.classList.contains('plus-end')) {
-        changed.removeChild(plusIcon);
-        const createDiv = document.createElement('div');
-        createDiv.classList.add('end-container');
-        changed.addChild(createDiv);
-        const createInput = document.createElement('input');
-        createInput.type = 'date';
-        createInput.name = 'end-main';
-        createInput.id = 'mainend';
-        createDiv.addChild(createInput);
-        const createIcon = document.createElement('i');
-        createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
-        createDiv.addChild(createIcon);
+        createDiv.appendChild(createInput);
+        createDiv.appendChild(createIcon);
+        changed.replaceChild(createDiv, target);
     } else if (target.classList.contains('check-end')) {
-        const newEnd = dateInput.value;
-        divContainer.removeChild(checkIcon);
-        divContainer.removeChild(dateInput);
-        changed.removeChild(divContainer);
+        myLibrary[index].end = dateInput.value;
         const createText = document.createElement('p');
         createText.classList.add('ending');
-        createText.textContent = newEnd;
-        changed.addChild(createText);
-        myLibrary[changed].end = newEnd;
+        createText.textContent = myLibrary[index].end;
+        divContainer.removeChild(target);
+        divContainer.removeChild(dateInput);
+        changedCheck.replaceChild(createText, divContainer);
         displayLibrary();
     } else if (target.classList.contains('ending')) {
-        changed.removeChild(dateText);
-        const createDiv = document.createElement('div');
-        createDiv.classList.add('end-container');  
-        changed.addChild(createDiv);
-        const createInput = document.createElement('input');
-        createInput.type = 'date';
-        createInput.name = 'end-main';
-        createInput.id = 'mainend';
-        createDiv.addChild(createInput);
-        const createIcon = document.createElement('i');
-        createIcon.classList.add('fa-solid', 'fa-check', 'check-end');
-        createDiv.addChild(createIcon);
+        createDiv.appendChild(createInput);
+        createDiv.appendChild(createIcon);
+        changed.replaceChild(createDiv, target);
     }
 }
 
@@ -371,7 +336,3 @@ function updateLibraryStats() {
 
 displayLibrary();
 handleClicks();
-
-document.onclick = () => {
-    console.log(myLibrary);
-}
