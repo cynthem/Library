@@ -47,15 +47,15 @@ function displayLibrary() {
         rating.classList.add('fa-solid');
         if (myLibrary[i].rating === '') {
             rating.classList.add('fa-plus', 'plus-rating');
-        } else if (myLibrary[i].rating === 1) {
+        } else if (myLibrary[i].rating === '1') {
             rating.classList.add('fa-1');
-        } else if (myLibrary[i].rating === 2) {
+        } else if (myLibrary[i].rating === '2') {
             rating.classList.add('fa-2');
-        } else if (myLibrary[i].rating === 3) {
+        } else if (myLibrary[i].rating === '3') {
             rating.classList.add('fa-3');
-        } else if (myLibrary[i].rating === 4) {
+        } else if (myLibrary[i].rating === '4') {
             rating.classList.add('fa-4');
-        } else if (myLibrary[i].rating === 5) {
+        } else if (myLibrary[i].rating === '5') {
             rating.classList.add('fa-5');
         }
         listRow.appendChild(rating);
@@ -176,21 +176,11 @@ function validateForm(e) {
         } else if (radioWish.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
         } else if (radioNone.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, 'none', startInput.value, endInput.value);
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioNone.value, startInput.value, endInput.value);
         }
         detailsForm.reset();
         statusForm.reset();
     }
-    //if (/\d/.test(startInput.value) && startInput.value.includes('m') ||
-       ///\d/.test(startInput.value) && startInput.value.includes('d') || 
-      //  /\d/.test(startInput.value) && startInput.value.includes('y')) {
-      //      startError.classList.remove('invisible');
-    //}
-    //if (/\d/.test(endInput.value) && endInput.value.includes('m') ||
-    //    /\d/.test(endInput.value) && endInput.value.includes('d') || 
-    //    /\d/.test(endInput.value) && endInput.value.includes('y')) {
-    //        endError.classList.remove('invisible');
-    //}
 }
 
 function changeRating(e) {
@@ -199,19 +189,19 @@ function changeRating(e) {
     if (target.classList.contains('plus-rating')) {
         target.classList.remove('fa-plus', 'plus-rating');
         target.classList.add('fa-1');
-        myLibrary[changed].rating = 1;
+        myLibrary[changed].rating = '1';
     } else if (target.classList.contains('fa-1')) {
         target.classList.replace('fa-1', 'fa-2');
-        myLibrary[changed].rating = 2;
+        myLibrary[changed].rating = '2';
     } else if (target.classList.contains('fa-2')) {
         target.classList.replace('fa-2', 'fa-3');
-        myLibrary[changed].rating = 3;
+        myLibrary[changed].rating = '3';
     } else if (target.classList.contains('fa-3')) {
         target.classList.replace('fa-3', 'fa-4');
-        myLibrary[changed].rating = 4;
+        myLibrary[changed].rating = '4';
     } else if (target.classList.contains('fa-4')) {
         target.classList.replace('fa-4', 'fa-5');
-        myLibrary[changed].rating = 5;
+        myLibrary[changed].rating = '5';
     } else if (target.classList.contains('fa-5')) {
         target.classList.remove('fa-5');
         target.classList.add('fa-plus', 'plus-rating');
@@ -365,10 +355,3 @@ function updateLibraryStats() {
 
 displayLibrary();
 handleClicks();
-
-const radios = document.querySelectorAll('.radio');
-for (const rad of radios) {
-  rad.onclick = (e) => {
-    console.log(e.target.value);
-  }
-}
