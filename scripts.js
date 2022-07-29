@@ -37,10 +37,12 @@ function displayLibrary() {
         listContent.appendChild(listRow);
         // Title
         const title = document.createElement('p');
+        title.classList.add('title');
         title.textContent = myLibrary[i].title;
         listRow.appendChild(title);
         // Author
         const author = document.createElement('p');
+        author.classList.add('author');
         author.textContent = myLibrary[i].author;
         listRow.appendChild(author);
         // Rating
