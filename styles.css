@@ -144,10 +144,6 @@ input::placeholder {
     display: none;
 }
 
-.invisible {
-    display: none;
-}
-
 sup {
     position: relative;
 }
@@ -192,12 +188,21 @@ sup {
     margin-left: 1.3vw;
 }
 
+.end-date:hover,
+.start-date:hover {
+    cursor: text;
+}
+
 .status-form {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     gap: 4px;
     margin: 30px 1% 0 7%;
     font-size: 1.15vw;
+}
+
+.status-form > label:hover {
+    cursor: pointer;
 }
 
 .hide {
@@ -300,6 +305,15 @@ h2 {
     font-size: 1.15vw;
 }
 
+.title:hover, 
+.author:hover {
+    cursor: default;
+}
+
+.fa-solid:hover {
+    cursor: pointer;
+}
+
 .fa-circle-xmark {
     color: rgb(255, 82, 82);
 }
@@ -325,6 +339,11 @@ h2 {
     outline: none;
     color: #eaebeb;
     font-size: 14px;
+}
+
+#mainstart:hover,
+#mainend:hover {
+    cursor: text;
 }
 
 .fa-check {
