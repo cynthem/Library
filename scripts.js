@@ -1,12 +1,14 @@
 let myLibrary = [];
 
-function Book() {
-    this.title = title;
-    this.author = author;
-    this.rating = rating;
-    this.readStatus = readStatus;
-    this.start = start;
-    this.end = end;
+class Book {
+    constructor(title, author, rating, readStatus, start, end) {
+        this.title = title;
+        this.author = author;
+        this.rating = rating;
+        this.readStatus = readStatus;
+        this.start = start;
+        this.end = end;
+    }
 }
 
 // First check storage for pre-existing books
@@ -17,7 +19,7 @@ function Book() {
     //myLibrary = storedBooks;
 //}
 
-function addBookToLibrary(title, author, rating='', readStatus='', start='', end='') {
+function addBookToLibrary(title, author, rating, readStatus, start, end) {
     const newBook = new Book(title, author, rating, readStatus, start, end);
     myLibrary.push(newBook);
     displayLibrary();
@@ -30,7 +32,7 @@ function displayLibrary() {
     listContent.textContent = '';
     for (let i = 0; i < myLibrary.length; i++) {
         const listRow = document.createElement('div');
-        listRow.classList.add('.list-item');
+        listRow.classList.add('list-item');
         listContent.appendChild(listRow);
         // Title
         const title = document.createElement('p');
@@ -60,7 +62,7 @@ function displayLibrary() {
         // Status
         const readStatus = document.createElement('i');
         readStatus.classList.add('fa-solid');
-        if (myLibrary[i].readStatus === '') {
+        if (myLibrary[i].readStatus === 'none') {
             readStatus.classList.add('fa-plus', 'plus-status');
         } else if (myLibrary[i].readStatus === 'read') {
             readStatus.classList.add('fa-circle-check', 'fa-xl');
@@ -145,6 +147,7 @@ function validateForm(e) {
     const radioRead = document.getElementById('read');
     const radioUnread = document.getElementById('currently');
     const radioWish = document.getElementById('planning');
+    const radioNone = document.getElementById('none');
     if (titleInput.value === '') {
         titleError.style.display = 'block';
     } else {
@@ -162,17 +165,18 @@ function validateForm(e) {
         ratingError.style.display = 'none';
     }
     if (titleInput.value !== '' &&
-        authorInput.value !== '' &&
-        (!ratingInput.value < 1) &&
-        (!ratingInput.value > 5)) {
+        authorInput.value !== '' //&&
+        //(!ratingInput.value < 1) &&
+        //(!ratingInput.value > 5)
+        ) {
         if (radioRead.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioRead.value, startInput.value, endInput.value);
         } else if (radioUnread.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioUnread.value, startInput.value, endInput.value);
         } else if (radioWish.checked) {
             addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
-        } else if (!radioRead.checked && !radioUnread.checked && !radioWish.checked) {
-            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, radioWish.value, startInput.value, endInput.value);
+        } else if (radioNone.checked) {
+            addBookToLibrary(titleInput.value, authorInput.value, ratingInput.value, 'none', startInput.value, endInput.value);
         }
         detailsForm.reset();
         statusForm.reset();
@@ -234,7 +238,7 @@ function changeStatus(e) {
     } else if (target.classList.contains('fa-circle-xmark')) {
         target.classList.remove('fa-circle-xmark', 'fa-xl');
         target.classList.add('fa-plus', 'plus-status');
-        myLibrary[changed].status = '';
+        myLibrary[changed].status = 'none';
     }
     displayLibrary();
 }
@@ -351,7 +355,7 @@ function updateLibraryStats() {
             totalRead.textContent = readCounter;
         } else if (myLibrary[i].readStatus === 'unread' || 
                     myLibrary[i].readStatus === 'wish' ||
-                    myLibrary[i].readStatus === '') {
+                    myLibrary[i].readStatus === 'none') {
             unreadCounter += 1;
             totalUnread.textContent = unreadCounter;
         }
@@ -359,5 +363,12 @@ function updateLibraryStats() {
     totalBooks.textContent = myLibrary.length;
 }
 
-//displayLibrary();
-//handleClicks();
+displayLibrary();
+handleClicks();
+
+const radios = document.querySelectorAll('.radio');
+for (const rad of radios) {
+  rad.onclick = (e) => {
+    console.log(e.target.value);
+  }
+}
